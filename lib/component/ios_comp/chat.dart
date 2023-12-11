@@ -1,5 +1,5 @@
 // Chat Design : ...........
-import 'package:contact_diary_ios_android/provider/theme/contact_provider.dart';
+import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +16,9 @@ class _ChatDesignState extends State<ChatDesign> {
     var contactProvider = Provider.of<ContactProvider>(context);
     return ListView(
       children: contactProvider.contactList.map((e) {
-        return CupertinoButton(
-          onPressed: () {
+        return CupertinoListTile(
+          padding: const EdgeInsets.all(10.0),
+          onTap: () {
             showCupertinoModalPopup<void>(
               context: context,
               builder: (BuildContext context) => CupertinoActionSheet(
@@ -35,7 +36,7 @@ class _ChatDesignState extends State<ChatDesign> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                message: const Text('Send]['),
+                message: Text("+91 ${e.contact}"),
                 actions: <CupertinoActionSheetAction>[
                   CupertinoActionSheetAction(
                     /// This parameter indicates the action would be a default
@@ -66,33 +67,31 @@ class _ChatDesignState extends State<ChatDesign> {
               ),
             );
           },
-          child: CupertinoListTile(
-            leadingSize: 60,
-            leading: Container(
-              height: 60,
-              width: 60,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                color: CupertinoColors.black,
-              ),
-              child: Image(
-                image: AssetImage(e.pic),
-                fit: BoxFit.fill,
-              ),
+          leadingSize: 60,
+          leading: Container(
+            height: 60,
+            width: 60,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: CupertinoColors.black,
             ),
-            title: Text(
-              e.name,
-              style: const TextStyle(color: CupertinoColors.darkBackgroundGray),
+            child: Image(
+              image: AssetImage(e.pic),
+              fit: BoxFit.fill,
             ),
-            trailing: const Text(
-              '12:28 pm',
-              style: TextStyle(color: CupertinoColors.inactiveGray),
-            ),
-            subtitle: const Text(
-              'Flutter is Great',
-              style: TextStyle(color: CupertinoColors.inactiveGray),
-            ),
+          ),
+          title: Text(
+            e.name,
+            style: const TextStyle(color: CupertinoColors.darkBackgroundGray),
+          ),
+          trailing: const Text(
+            '12:28 pm',
+            style: TextStyle(color: CupertinoColors.inactiveGray),
+          ),
+          subtitle: const Text(
+            'Flutter is Great',
+            style: TextStyle(color: CupertinoColors.inactiveGray),
           ),
         );
       }).toList(),

@@ -1,7 +1,7 @@
 import 'package:contact_diary_ios_android/component/ios_comp/call.dart';
 import 'package:contact_diary_ios_android/component/ios_comp/chat.dart';
 import 'package:contact_diary_ios_android/component/ios_comp/setting.dart';
-import 'package:contact_diary_ios_android/provider/theme/theme_chenge_app_provider.dart';
+import 'package:contact_diary_ios_android/provider/theme_chenge_app_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 

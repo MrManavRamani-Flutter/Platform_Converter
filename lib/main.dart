@@ -1,5 +1,5 @@
-import 'package:contact_diary_ios_android/provider/theme/contact_provider.dart';
-import 'package:contact_diary_ios_android/provider/theme/theme_chenge_app_provider.dart';
+import 'package:contact_diary_ios_android/provider/contact_provider.dart';
+import 'package:contact_diary_ios_android/provider/theme_chenge_app_provider.dart';
 import 'package:contact_diary_ios_android/screen/android_view/home_a.dart';
 import 'package:contact_diary_ios_android/screen/ios_view/home_i.dart';
 import 'package:flutter/cupertino.dart';

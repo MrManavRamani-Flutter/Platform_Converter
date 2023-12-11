@@ -1,5 +1,5 @@
 // Call Design : ................
-import 'package:contact_diary_ios_android/provider/theme/contact_provider.dart';
+import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 

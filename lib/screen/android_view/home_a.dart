@@ -1,7 +1,7 @@
 import 'package:contact_diary_ios_android/component/android_comp/calls.dart';
 import 'package:contact_diary_ios_android/component/android_comp/chats.dart';
 import 'package:contact_diary_ios_android/component/android_comp/settings.dart';
-import 'package:contact_diary_ios_android/provider/theme/theme_chenge_app_provider.dart';
+import 'package:contact_diary_ios_android/provider/theme_chenge_app_provider.dart';
 import 'package:contact_diary_ios_android/screen/android_view/sidebar_a.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -92,7 +92,14 @@ class _HomeAState extends State<HomeA> with SingleTickerProviderStateMixin {
 
         floatingActionButton: (!isNotSettings)
             ? FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Alert();
+                    },
+                  );
+                },
                 child: const Icon(
                   Icons.add,
                   size: 35,
@@ -114,5 +121,19 @@ class _HomeAState extends State<HomeA> with SingleTickerProviderStateMixin {
         ),
       ),
     );
+  }
+}
+
+class Alert extends StatefulWidget {
+  const Alert({super.key});
+
+  @override
+  State<Alert> createState() => _AlertState();
+}
+
+class _AlertState extends State<Alert> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
