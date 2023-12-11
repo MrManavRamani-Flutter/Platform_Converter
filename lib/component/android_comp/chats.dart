@@ -1,4 +1,6 @@
 // Chat Design : ...........
+import 'dart:io';
+
 import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,10 +22,17 @@ class ChatDesign extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CircleAvatar(
-                        foregroundImage: AssetImage(e.pic),
-                        radius: 80,
-                      ),
+                      (e.pic == null)
+                          ? CircleAvatar(
+                              foregroundImage: AssetImage(e.assetPic!),
+                              radius: 80,
+                            )
+                          : CircleAvatar(
+                              foregroundImage: FileImage(
+                                File(e.pic!),
+                              ),
+                              radius: 80,
+                            ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -74,10 +83,17 @@ class ChatDesign extends StatelessWidget {
             );
           },
           child: ListTile(
-            leading: CircleAvatar(
-              radius: 30,
-              foregroundImage: AssetImage(e.pic),
-            ),
+            leading: (e.pic == null)
+                ? CircleAvatar(
+                    radius: 30,
+                    foregroundImage: AssetImage(e.assetPic!),
+                  )
+                : CircleAvatar(
+                    radius: 30,
+                    foregroundImage: FileImage(
+                      File(e.pic!),
+                    ),
+                  ),
             title: Text(e.name),
             trailing: const Text(
               '12:28 pm',

@@ -1,4 +1,6 @@
 // Chat Design : ...........
+import 'dart:io';
+
 import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -31,10 +33,15 @@ class _ChatDesignState extends State<ChatDesign> {
                       shape: BoxShape.circle,
                       color: CupertinoColors.white
                           .withOpacity(double.minPositive)),
-                  child: Image.asset(
-                    e.pic,
-                    fit: BoxFit.fill,
-                  ),
+                  child: (e.pic != null)
+                      ? Image.file(
+                          File(e.pic!),
+                          fit: BoxFit.fill,
+                        )
+                      : Image.asset(
+                          e.assetPic!,
+                          fit: BoxFit.fill,
+                        ),
                 ),
                 message: Text("+91 ${e.contact}"),
                 actions: <CupertinoActionSheetAction>[
@@ -76,10 +83,15 @@ class _ChatDesignState extends State<ChatDesign> {
               borderRadius: BorderRadius.circular(40),
               color: CupertinoColors.black,
             ),
-            child: Image(
-              image: AssetImage(e.pic),
-              fit: BoxFit.fill,
-            ),
+            child: (e.pic != null)
+                ? Image(
+                    image: FileImage(File(e.pic!)),
+                    fit: BoxFit.fill,
+                  )
+                : Image(
+                    image: AssetImage(e.assetPic!),
+                    fit: BoxFit.fill,
+                  ),
           ),
           title: Text(
             e.name,

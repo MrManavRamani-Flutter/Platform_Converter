@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider:
   modal_bottom_sheet:
+  image_picker:
+  path_provider:
 
 dev_dependencies:
   flutter_test:

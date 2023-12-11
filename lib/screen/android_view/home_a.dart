@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:contact_diary_ios_android/component/android_comp/calls.dart';
 import 'package:contact_diary_ios_android/component/android_comp/chats.dart';
 import 'package:contact_diary_ios_android/component/android_comp/settings.dart';
+import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:contact_diary_ios_android/provider/theme_chenge_app_provider.dart';
 import 'package:contact_diary_ios_android/screen/android_view/sidebar_a.dart';
 import 'package:flutter/material.dart';
@@ -134,6 +137,148 @@ class Alert extends StatefulWidget {
 class _AlertState extends State<Alert> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    var addDataP = Provider.of<ContactProvider>(context);
+    return AlertDialog(
+      title: const Text(
+        'Add Contact',
+      ),
+      content: SizedBox(
+        height: 455,
+        width: 400,
+        child: Stepper(
+          controlsBuilder: (context, details) {
+            if (addDataP.cs.currentStep == 0) {
+              return Row(
+                children: [
+                  FilledButton(
+                    onPressed: () {
+                      addDataP.checkContinueState();
+                    },
+                    child: const Text('Continue'),
+                  ),
+                ],
+              );
+            } else if (addDataP.cs.currentStep == 3) {
+              return Row(
+                children: [
+                  FilledButton(
+                    onPressed: () {
+                      addDataP.checkFillData();
+                      addDataP.checkContinueState();
+                      Navigator.pop(context);
+                      addDataP.cs.currentStep = 0;
+                    },
+                    child: const Text('Finish'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      addDataP.checkCancelState();
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                ],
+              );
+            } else {
+              return Row(
+                children: [
+                  FilledButton(
+                    onPressed: () {
+                      addDataP.checkContinueState();
+                    },
+                    child: const Text('Continue'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      addDataP.checkCancelState();
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                ],
+              );
+            }
+          },
+          currentStep: addDataP.cs.currentStep,
+          steps: <Step>[
+            Step(
+              state: (addDataP.cs.currentStep == 0)
+                  ? StepState.editing
+                  : (addDataP.con_var.nameC.text.isEmpty)
+                      ? StepState.error
+                      : StepState.complete,
+              title: const Text('Name'),
+              content: TextField(
+                controller: addDataP.con_var.nameC,
+                keyboardType: TextInputType.text,
+                decoration: const InputDecoration(hintText: 'Enter your name'),
+              ),
+            ),
+            Step(
+              state: (addDataP.cs.currentStep < 1)
+                  ? StepState.indexed
+                  : (addDataP.cs.currentStep == 1)
+                      ? StepState.editing
+                      : (addDataP.con_var.emailC.text.isEmpty)
+                          ? StepState.error
+                          : StepState.complete,
+              title: const Text('Email'),
+              content: TextField(
+                controller: addDataP.con_var.emailC,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(hintText: 'Enter your Email'),
+              ),
+            ),
+            Step(
+              state: (addDataP.cs.currentStep < 2)
+                  ? StepState.indexed
+                  : (addDataP.cs.currentStep == 2)
+                      ? StepState.editing
+                      : (addDataP.con_var.contactC.text.isEmpty)
+                          ? StepState.error
+                          : StepState.complete,
+              title: const Text('Contact'),
+              content: TextField(
+                onSubmitted: (val) {
+                  addDataP.con_var.contactC.text = val;
+                },
+                keyboardType: TextInputType.phone,
+                controller: addDataP.con_var.contactC,
+                maxLength: 10,
+                decoration:
+                    const InputDecoration(hintText: 'Enter your Contact'),
+              ),
+            ),
+            Step(
+              state: (addDataP.cs.currentStep < 3)
+                  ? StepState.indexed
+                  : (addDataP.cs.currentStep == 3)
+                      ? StepState.editing
+                      : (addDataP.con_var.contactC.text.isEmpty)
+                          ? StepState.error
+                          : StepState.complete,
+              title: const Text('Profile Pic'),
+              content: Row(
+                children: [
+                  (addDataP.pickImage != null)
+                      ? CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Colors.grey,
+                          backgroundImage: FileImage(File(addDataP.pickImage!)),
+                        )
+                      : const CircleAvatar(
+                          radius: 40,
+                          child: FlutterLogo(),
+                        ),
+                  IconButton(
+                      onPressed: () {
+                        addDataP.imagePic();
+                      },
+                      icon: const Icon(Icons.photo)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
