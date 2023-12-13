@@ -3,26 +3,8 @@ import 'package:contact_diary_ios_android/provider/month_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SettingsDesign extends StatefulWidget {
+class SettingsDesign extends StatelessWidget {
   const SettingsDesign({super.key});
-
-  @override
-  State<SettingsDesign> createState() => _SettingsDesignState();
-}
-
-class _SettingsDesignState extends State<SettingsDesign> {
-  // DateTime dateTime = DateTime.now();
-  // TimeOfDay timeOfDay = TimeOfDay.now();
-  // late String date;
-  // late String time;
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   date = '${dateTime.day},${dateTime.month} ${dateTime.year}';
-  //   time =
-  //       '${timeOfDay.hour % 12}:${timeOfDay.minute % 60} ${timeOfDay.period.name}';
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +26,8 @@ class _SettingsDesignState extends State<SettingsDesign> {
                     const Spacer(),
                     Text(
                       (monthProvider.dateChecked)
-                          ? monthProvider.dateFind1('')
+                          ? monthProvider.dateModel.date
                           : monthProvider.dateFind(),
-                      // '${dateTime.day},${monthProvider.monthName.elementAt(dateTime.month - 1).month} ${dateTime.year}',
                       style: const TextStyle(fontSize: 18),
                     ),
                   ],
@@ -57,18 +38,8 @@ class _SettingsDesignState extends State<SettingsDesign> {
                   width: double.infinity,
                   color: Colors.blue,
                   child: TextButton(
-                    onPressed: () async {
-                      DateTime? res = await showDatePicker(
-                          context: context,
-                          initialDate: monthProvider.dateTime,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2025),
-                          initialDatePickerMode: DatePickerMode.day,
-                          initialEntryMode: DatePickerEntryMode.calendar);
-                      monthProvider.dateFind1(res);
-                      // setState(() {
-                      //   date = '${res?.day},${res?.month} ${res?.year}';
-                      // });
+                    onPressed: () {
+                      monthProvider.dateFind1(context);
                     },
                     child: const Text(
                       'Change Date',
@@ -109,15 +80,7 @@ class _SettingsDesignState extends State<SettingsDesign> {
                 color: Colors.blue,
                 child: TextButton(
                   onPressed: () async {
-                    TimeOfDay? res1 = await showTimePicker(
-                      context: context,
-                      initialTime: monthProvider.timeOfDay,
-                    );
-                    monthProvider.timeFind1(res1);
-                    // setState(() {
-                    //   time =
-                    //       '${timeOfDay.hour % 12}:${timeOfDay.minute % 60} ${timeOfDay.period.name}';
-                    // });
+                    monthProvider.timeFind1(context);
                   },
                   child: const Text(
                     'Change Time',

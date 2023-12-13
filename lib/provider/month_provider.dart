@@ -24,10 +24,19 @@ class MonthProvider extends ChangeNotifier {
   DateTime dateTime = DateTime.now();
   bool dateChecked = false;
 
-  String dateFind1(res) {
+  void dateFind1(context) async {
     dateChecked = true;
-    // dateModel.date =
-    return '${dateTime.day},${monthName.elementAt(dateTime.month - 1).month} ${dateTime.year}';
+    DateTime? res = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+      initialDatePickerMode: DatePickerMode.day,
+      initialEntryMode: DatePickerEntryMode.calendar,
+    );
+    dateModel.date =
+        '${res!.day},${monthName.elementAt(res.month - 1).month} ${res.year}';
+    notifyListeners();
   }
 
   String dateFind() {
@@ -36,10 +45,15 @@ class MonthProvider extends ChangeNotifier {
 
   TimeOfDay timeOfDay = TimeOfDay.now();
   bool timeChecked = false;
-  void timeFind1(res) {
+  void timeFind1(context) async {
     timeChecked = true;
+    TimeOfDay? res = await showTimePicker(
+      context: context,
+      initialTime: timeOfDay,
+    );
     timeModel.timeOfDay =
-        '${res.hour % 12}:${res.minute % 60} ${(res.hour >= 12) ? 'PM' : 'AM'}';
+        '${res!.hour % 12}:${res.minute % 60} ${(res.hour >= 12) ? 'PM' : 'AM'}';
+    notifyListeners();
   }
 
   String timeFind() {

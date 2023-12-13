@@ -3,14 +3,9 @@ import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CallDesign extends StatefulWidget {
+class CallDesign extends StatelessWidget {
   const CallDesign({super.key});
 
-  @override
-  State<CallDesign> createState() => _CallDesignState();
-}
-
-class _CallDesignState extends State<CallDesign> {
   @override
   Widget build(BuildContext context) {
     var contactProvider = Provider.of<ContactProvider>(context);
