@@ -5,14 +5,9 @@ import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-class ChatDesign extends StatefulWidget {
+class ChatDesign extends StatelessWidget {
   const ChatDesign({super.key});
 
-  @override
-  State<ChatDesign> createState() => _ChatDesignState();
-}
-
-class _ChatDesignState extends State<ChatDesign> {
   @override
   Widget build(BuildContext context) {
     var contactProvider = Provider.of<ContactProvider>(context);
@@ -46,8 +41,6 @@ class _ChatDesignState extends State<ChatDesign> {
                 message: Text("+91 ${e.contact}"),
                 actions: <CupertinoActionSheetAction>[
                   CupertinoActionSheetAction(
-                    /// This parameter indicates the action would be a default
-                    /// default behavior, turns the action's text to bold text.
                     isDefaultAction: true,
                     onPressed: () {
                       Navigator.pop(context);
@@ -61,9 +54,6 @@ class _ChatDesignState extends State<ChatDesign> {
                     child: const Text('Action'),
                   ),
                   CupertinoActionSheetAction(
-                    /// This parameter indicates the action would perform
-                    /// a destructive action such as delete or exit and turns
-                    /// the action's text color to red.
                     isDestructiveAction: true,
                     onPressed: () {
                       Navigator.pop(context);

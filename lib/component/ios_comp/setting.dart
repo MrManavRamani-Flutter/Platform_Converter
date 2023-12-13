@@ -1,5 +1,7 @@
 // Settings : ...........
+import 'package:contact_diary_ios_android/provider/month_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class SettingsDesign extends StatefulWidget {
   const SettingsDesign({super.key});
@@ -11,6 +13,7 @@ class SettingsDesign extends StatefulWidget {
 class _SettingsDesignState extends State<SettingsDesign> {
   @override
   Widget build(BuildContext context) {
+    var monthProvider = Provider.of<MonthProvider>(context);
     return ListView(
       children: [
         Padding(
@@ -19,16 +22,18 @@ class _SettingsDesignState extends State<SettingsDesign> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                const Row(
+                Row(
                   children: [
-                    Text(
+                    const Text(
                       'Date',
                       style: TextStyle(fontSize: 18),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '20, April 2022',
-                      style: TextStyle(fontSize: 18),
+                      (monthProvider.iDateChecked)
+                          ? monthProvider.dateModel.date
+                          : monthProvider.iDate(),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ],
                 ),
@@ -38,7 +43,9 @@ class _SettingsDesignState extends State<SettingsDesign> {
                   width: double.infinity,
                   color: CupertinoColors.activeBlue,
                   child: CupertinoButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      monthProvider.iDateFind(context);
+                    },
                     child: const Text(
                       'Change Date',
                       style:
@@ -57,16 +64,18 @@ class _SettingsDesignState extends State<SettingsDesign> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              const Row(
+              Row(
                 children: [
-                  Text(
+                  const Text(
                     'Time',
                     style: TextStyle(fontSize: 18),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
-                    '9:45:08 AM',
-                    style: TextStyle(fontSize: 18),
+                    (monthProvider.iTimeChecked)
+                        ? monthProvider.timeModel.timeOfDay
+                        : monthProvider.iTime(),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -76,7 +85,9 @@ class _SettingsDesignState extends State<SettingsDesign> {
                 width: double.infinity,
                 color: CupertinoColors.activeBlue,
                 child: CupertinoButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    monthProvider.iTimeFind(context);
+                  },
                   child: const Text(
                     'Change Time',
                     style:

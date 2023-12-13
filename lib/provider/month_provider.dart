@@ -1,6 +1,7 @@
 import 'package:contact_diary_ios_android/model/date_model.dart';
 import 'package:contact_diary_ios_android/model/month_model.dart';
 import 'package:contact_diary_ios_android/model/time_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MonthProvider extends ChangeNotifier {
@@ -21,9 +22,78 @@ class MonthProvider extends ChangeNotifier {
     MonthModel(month: 'Dec'),
   ];
 
+  // Android
   DateTime dateTime = DateTime.now();
   bool dateChecked = false;
+  bool iDateChecked = false;
+  TimeOfDay timeOfDay = TimeOfDay.now();
+  bool timeChecked = false;
+  bool iTimeChecked = false;
 
+  // Ios Date :
+  String iDate() {
+    return '${dateTime.day}, ${monthName.elementAt(dateTime.month - 1).month} ${dateTime.year}';
+  }
+
+  void iDateFind(context) async {
+    iDateChecked = true;
+    await showCupertinoModalPopup(
+      context: context,
+      builder: (context) {
+        return Container(
+          height: 300,
+          color: CupertinoColors.white,
+          child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              onDateTimeChanged: (DateTime dateTime) {
+                dateModel.date =
+                    '${dateTime.day}, ${monthName.elementAt(dateTime.month - 1).month} ${dateTime.year}';
+              }),
+        );
+      },
+    );
+    notifyListeners();
+  }
+
+  // Ios Time :
+  String iTime() {
+    return '${dateTime.hour % 12}:${dateTime.minute % 60}:${dateTime.second} ${(dateTime.hour >= 12) ? 'PM' : 'AM'}';
+  }
+
+  void iTimeFind(context) async {
+    iTimeChecked = true;
+    await showCupertinoModalPopup(
+      context: context,
+      builder: (context) {
+        return Container(
+          height: 300,
+          color: CupertinoColors.white,
+          child: CupertinoDatePicker(
+            use24hFormat: false,
+            mode: CupertinoDatePickerMode.time,
+            onDateTimeChanged: (DateTime dateTime) {
+              if (dateTime.hour >= 1 && dateTime.hour <= 11) {
+                timeModel.timeOfDay =
+                    '${dateTime.hour}:${dateTime.minute % 60} ${(dateTime.hour >= 12) ? 'PM' : 'AM'}';
+              } else if (dateTime.hour > 12 && dateTime.hour <= 23) {
+                timeModel.timeOfDay =
+                    '${dateTime.hour % 12}:${dateTime.minute % 60} ${(dateTime.hour >= 12) ? 'PM' : 'AM'}';
+              } else if ((dateTime.hour % 12) == 0) {
+                timeModel.timeOfDay =
+                    '${(dateTime.hour % 12) + 12}:${dateTime.minute % 60} ${(dateTime.hour >= 12) ? 'PM' : 'AM'}';
+              } else if (dateTime.hour == 24) {
+                timeModel.timeOfDay =
+                    '${(dateTime.hour % 12) + 12}:${dateTime.minute % 60} ${(dateTime.hour >= 12) ? 'PM' : 'AM'}';
+              }
+            },
+          ),
+        );
+      },
+    );
+    notifyListeners();
+  }
+
+  //Android Date :
   void dateFind1(context) async {
     dateChecked = true;
     DateTime? res = await showDatePicker(
@@ -43,16 +113,28 @@ class MonthProvider extends ChangeNotifier {
     return '${dateTime.day},${monthName.elementAt(dateTime.month - 1).month} ${dateTime.year}';
   }
 
-  TimeOfDay timeOfDay = TimeOfDay.now();
-  bool timeChecked = false;
+  //Android Time :
   void timeFind1(context) async {
     timeChecked = true;
     TimeOfDay? res = await showTimePicker(
       context: context,
       initialTime: timeOfDay,
     );
-    timeModel.timeOfDay =
-        '${res!.hour % 12}:${res.minute % 60} ${(res.hour >= 12) ? 'PM' : 'AM'}';
+
+    if (res!.hour >= 1 && res.hour <= 11) {
+      timeModel.timeOfDay =
+          '${res.hour}:${res.minute % 60} ${(res.hour >= 12) ? 'PM' : 'AM'}';
+    } else if (res.hour > 12 && res.hour <= 23) {
+      timeModel.timeOfDay =
+          '${res.hour % 12}:${res.minute % 60} ${(res.hour >= 12) ? 'PM' : 'AM'}';
+    } else if ((res.hour % 12) == 0) {
+      timeModel.timeOfDay =
+          '${(res.hour % 12) + 12}:${res.minute % 60} ${(res.hour >= 12) ? 'PM' : 'AM'}';
+    } else if (res.hour == 24) {
+      timeModel.timeOfDay =
+          '${(res.hour % 12) + 12}:${res.minute % 60} ${(res.hour >= 12) ? 'PM' : 'AM'}';
+    }
+
     notifyListeners();
   }
 
