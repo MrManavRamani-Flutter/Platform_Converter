@@ -38,27 +38,31 @@ class ChatDesign extends StatelessWidget {
                           fit: BoxFit.fill,
                         ),
                 ),
-                message: Text("+91 ${e.contact}"),
+                message: Column(
+                  children: [
+                    Text(
+                      "${e.name}\n",
+                      style: const TextStyle(
+                          fontSize: 18, color: CupertinoColors.black),
+                    ),
+                    Text(
+                      "+91 ${e.contact}",
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
                 actions: <CupertinoActionSheetAction>[
                   CupertinoActionSheetAction(
                     isDefaultAction: true,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Default Action'),
-                  ),
-                  CupertinoActionSheetAction(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Action'),
+                    onPressed: () {},
+                    child: const Text('Send Message'),
                   ),
                   CupertinoActionSheetAction(
                     isDestructiveAction: true,
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('Destructive Action'),
+                    child: const Text('Cancel'),
                   ),
                 ],
               ),
