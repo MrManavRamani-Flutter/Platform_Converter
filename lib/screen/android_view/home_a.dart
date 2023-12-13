@@ -202,12 +202,12 @@ class _AlertState extends State<Alert> {
             Step(
               state: (addDataP.cs.currentStep == 0)
                   ? StepState.editing
-                  : (addDataP.con_var.nameC.text.isEmpty)
+                  : (addDataP.convar.nameC.text.isEmpty)
                       ? StepState.error
                       : StepState.complete,
               title: const Text('Name'),
               content: TextField(
-                controller: addDataP.con_var.nameC,
+                controller: addDataP.convar.nameC,
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(hintText: 'Enter your name'),
               ),
@@ -217,12 +217,12 @@ class _AlertState extends State<Alert> {
                   ? StepState.indexed
                   : (addDataP.cs.currentStep == 1)
                       ? StepState.editing
-                      : (addDataP.con_var.emailC.text.isEmpty)
+                      : (addDataP.convar.emailC.text.isEmpty)
                           ? StepState.error
                           : StepState.complete,
               title: const Text('Email'),
               content: TextField(
-                controller: addDataP.con_var.emailC,
+                controller: addDataP.convar.emailC,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(hintText: 'Enter your Email'),
               ),
@@ -232,16 +232,16 @@ class _AlertState extends State<Alert> {
                   ? StepState.indexed
                   : (addDataP.cs.currentStep == 2)
                       ? StepState.editing
-                      : (addDataP.con_var.contactC.text.isEmpty)
+                      : (addDataP.convar.contactC.text.isEmpty)
                           ? StepState.error
                           : StepState.complete,
               title: const Text('Contact'),
               content: TextField(
                 onSubmitted: (val) {
-                  addDataP.con_var.contactC.text = val;
+                  addDataP.convar.contactC.text = val;
                 },
                 keyboardType: TextInputType.phone,
-                controller: addDataP.con_var.contactC,
+                controller: addDataP.convar.contactC,
                 maxLength: 10,
                 decoration:
                     const InputDecoration(hintText: 'Enter your Contact'),
@@ -252,7 +252,7 @@ class _AlertState extends State<Alert> {
                   ? StepState.indexed
                   : (addDataP.cs.currentStep == 3)
                       ? StepState.editing
-                      : (addDataP.con_var.contactC.text.isEmpty)
+                      : (addDataP.convar.contactC.text.isEmpty)
                           ? StepState.error
                           : StepState.complete,
               title: const Text('Profile Pic'),

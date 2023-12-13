@@ -1,4 +1,6 @@
 // Call Design : ................
+import 'dart:io';
+
 import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +17,7 @@ class _CallDesignState extends State<CallDesign> {
   Widget build(BuildContext context) {
     var contactProvider = Provider.of<ContactProvider>(context);
     return ListView(
-      children: contactProvider.callList.map((e) {
+      children: contactProvider.contactList.map((e) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
           child: CupertinoListTile(
@@ -28,10 +30,15 @@ class _CallDesignState extends State<CallDesign> {
                 borderRadius: BorderRadius.circular(40),
                 color: CupertinoColors.black,
               ),
-              child: Image(
-                image: AssetImage(e.pic),
-                fit: BoxFit.fill,
-              ),
+              child: (e.pic != null)
+                  ? Image(
+                      image: FileImage(File(e.pic!)),
+                      fit: BoxFit.fill,
+                    )
+                  : Image(
+                      image: AssetImage(e.assetPic!),
+                      fit: BoxFit.fill,
+                    ),
             ),
             title: Text(e.name),
             trailing: const Padding(

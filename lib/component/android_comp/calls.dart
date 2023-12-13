@@ -15,14 +15,19 @@ class _CallDesignState extends State<CallDesign> {
   Widget build(BuildContext context) {
     var contactProvider = Provider.of<ContactProvider>(context);
     return ListView(
-      children: contactProvider.callList.map((e) {
+      children: contactProvider.contactList.map((e) {
         return InkWell(
           onTap: () {},
           child: ListTile(
-            leading: CircleAvatar(
-              radius: 27,
-              foregroundImage: AssetImage(e.pic),
-            ),
+            leading: (e.pic != null)
+                ? CircleAvatar(
+                    radius: 27,
+                    foregroundImage: AssetImage(e.pic!),
+                  )
+                : CircleAvatar(
+                    radius: 27,
+                    foregroundImage: AssetImage(e.assetPic!),
+                  ),
             title: Text(e.name),
             trailing: const Padding(
               padding: EdgeInsets.all(8.0),

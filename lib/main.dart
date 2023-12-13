@@ -1,4 +1,5 @@
 import 'package:contact_diary_ios_android/provider/contact_provider.dart';
+import 'package:contact_diary_ios_android/provider/month_provider.dart';
 import 'package:contact_diary_ios_android/provider/theme_chenge_app_provider.dart';
 import 'package:contact_diary_ios_android/screen/android_view/home_a.dart';
 import 'package:contact_diary_ios_android/screen/ios_view/home_i.dart';
@@ -27,6 +28,9 @@ class _MyAppState extends State<MyApp> {
           ),
           ChangeNotifierProvider(
             create: (context) => ContactProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => MonthProvider(),
           ),
         ],
         builder: (context, _) {
