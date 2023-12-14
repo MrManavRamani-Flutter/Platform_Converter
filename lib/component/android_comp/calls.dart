@@ -1,4 +1,6 @@
 // Call Design : ................
+import 'dart:io';
+
 import 'package:contact_diary_ios_android/provider/contact_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,14 +16,16 @@ class CallDesign extends StatelessWidget {
         return InkWell(
           onTap: () {},
           child: ListTile(
-            leading: (e.pic != null)
+            leading: (e.pic == null)
                 ? CircleAvatar(
-                    radius: 27,
-                    foregroundImage: AssetImage(e.pic!),
+                    foregroundImage: AssetImage(e.assetPic!),
+                    radius: 30,
                   )
                 : CircleAvatar(
-                    radius: 27,
-                    foregroundImage: AssetImage(e.assetPic!),
+                    foregroundImage: FileImage(
+                      File(e.pic!),
+                    ),
+                    radius: 30,
                   ),
             title: Text(e.name),
             trailing: const Padding(
