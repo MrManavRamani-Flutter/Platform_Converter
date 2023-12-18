@@ -40,6 +40,9 @@ class _MyAppState extends State<MyApp> {
                   routes: {
                     '/': (context) => const HomeA(),
                   },
+                  theme: ThemeData.light(useMaterial3: true),
+                  darkTheme: ThemeData.dark(useMaterial3: true),
+                  themeMode: ThemeMode.system,
                 )
               : CupertinoApp(
                   debugShowCheckedModeBanner: false,

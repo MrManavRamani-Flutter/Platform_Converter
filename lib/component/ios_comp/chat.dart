@@ -35,7 +35,7 @@ class ChatDesign extends StatelessWidget {
                         )
                       : Image.asset(
                           e.assetPic!,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                         ),
                 ),
                 message: Column(
@@ -43,7 +43,8 @@ class ChatDesign extends StatelessWidget {
                     Text(
                       "${e.name}\n",
                       style: const TextStyle(
-                          fontSize: 18, color: CupertinoColors.black),
+                        fontSize: 18,
+                      ),
                     ),
                     Text(
                       "+91 ${e.contact}",
@@ -89,15 +90,15 @@ class ChatDesign extends StatelessWidget {
           ),
           title: Text(
             e.name,
-            style: const TextStyle(color: CupertinoColors.darkBackgroundGray),
+            // style: const TextStyle(color: CupertinoColors.darkBackgroundGray),
           ),
           trailing: const Text(
             '12:28 pm',
-            style: TextStyle(color: CupertinoColors.inactiveGray),
+            // style: TextStyle(color: CupertinoColors.inactiveGray),
           ),
           subtitle: const Text(
             'Flutter is Great',
-            style: TextStyle(color: CupertinoColors.inactiveGray),
+            // style: TextStyle(color: CupertinoColors.inactiveGray),
           ),
         );
       }).toList(),

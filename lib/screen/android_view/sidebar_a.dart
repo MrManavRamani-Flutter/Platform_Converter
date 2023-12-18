@@ -17,7 +17,7 @@ class _NavbarState extends State<Navbar> {
             accountName: const Text('Avtar Profile'),
             accountEmail: const Text(
               '+91 70965 84269',
-              style: TextStyle(color: Colors.grey),
+              // style: TextStyle(color: Colors.grey),
             ),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(

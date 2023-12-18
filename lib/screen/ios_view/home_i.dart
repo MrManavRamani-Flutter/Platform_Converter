@@ -59,9 +59,7 @@ class _HomeIState extends State<HomeI> {
             return CupertinoTabView(
               builder: (context) {
                 return CupertinoPageScaffold(
-                  child: Center(
-                    child: allComponants[index],
-                  ),
+                  child: allComponants[index],
                 );
               },
             );
