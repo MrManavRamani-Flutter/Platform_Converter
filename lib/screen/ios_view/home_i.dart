@@ -39,7 +39,7 @@ class _HomeIState extends State<HomeI> {
             themeProFalse.platFromCheck();
           },
         ),
-        leading: const Icon(CupertinoIcons.list_bullet),
+        // leading: const Icon(CupertinoIcons.list_bullet),
       ),
       child: CupertinoTabScaffold(
           tabBar: CupertinoTabBar(
